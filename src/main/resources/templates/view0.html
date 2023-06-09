@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+	TODO: Task 1, Task 2, Task 3
+-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login</title>
+	</head>
+	<body>
+
+		<h2>Please Login</h2>
+
+		<form data-th-action="@{/login}" data-th-object="${user}" method="POST">
+			<div data-th-if="${#fields.hasGlobalErrors()}">
+				<p data-th-each="err: ${#fields.globalErrors()}" data-th-text="${err}"></p>
+			</div>
+			<table>
+				<tr>
+					<td>
+						<label for="username">Username:</label>
+					</td>
+					<td>
+						<input type="text" name="username" id="username" size="30"
+								placeholder="Please type in your username" minlength="2" data-th-field="*{username}" required>
+						<span data-th-if="${#fields.hasErrors('username')}" data-th-errors="*{username}"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="password">Password:</label>
+					</td>
+					<td>
+						<input type="password" name="password" id="password" size="30"
+								placeholder="Please type in your password" minlength="2" required>
+						<span data-th-if="${#fields.hasErrors('password')}" data-th-errors="*{password}"></span>
+					</td>
+				</tr>
+				<tr data-th-if="${captcha != null}" data-th-object="${captcha}">
+					<td>
+						<label for="captchaAnswer" data-th-text="*{'What is ' + firstNumber + ' ' + operator + ' ' + secondNumber + '?'}"></label>
+					</td>
+					<td>
+						<input type="number" name="captchaAnswer" id="captchaAnswer" size="30"
+							   placeholder="Please type in the answer" required>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<button type="submit">Login</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+	</body>
+</html>
